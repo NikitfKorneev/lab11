@@ -1,0 +1,23 @@
+.selected{
+    color: rgb(6, 236, 232);
+    background-color: rgb(0, 0, 0);
+
+}
+
+.tdForm{
+    border: 2px;
+    font-size: 20px;
+    width: 100px;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: -180px;
+    margin-left: 300px;
+}
+
+.blockForm{
+    border: 2px;
+    font-size: 20px;
+    width: 100px;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: -180px;
+    margin-left: 300px;
+}
