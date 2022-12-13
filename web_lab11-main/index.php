@@ -31,9 +31,11 @@
     </header>
     <main>
     <div id="product_menu"><?php 
-        echo '<a href=/ '; // начало ссылки ВСЯ ТАБЛИЦА УМНОЖНЕНИЯ
         if(isset($_GET['html_type']) ) 
-                echo '?html_type='.$_GET['html_type']; 
+            echo '<a href=?html_type='.$_GET['html_type'];
+        else
+        echo '<a href=/'; // начало ссылки ВСЯ ТАБЛИЦА УМНОЖНЕНИЯ
+         
         if( !isset($_GET['content']) ) // если в скрипт НЕ был передан параметр content 
             echo ' class="selected"'; // ссылка выделяется через CSS-класс
         echo '  >Вся таблица умножения</a><br>'; // конец ссылки
@@ -63,13 +65,12 @@ function outTableForm()
     // если параметр content не был передан в программу
     if( !isset($_GET['content']) ) 
         { 
-        echo '<table class="allForm">';
+        echo '<table class="tdallForm">';
         for($i=2; $i<10; $i++) // цикл со счетчиком от 2 до 9
             { 
-            echo '<tr>'; // оформляем таблицу в табличной форме
+             // оформляем таблицу в табличной форме
             outRowtd( $i ); // вызывем функцию, формирующую содержание
             // столбца умножения на $i (на 4, если $i==4) 
-            echo '</tr>'; 
             } 
             echo '</table>'; 
         } 
@@ -91,10 +92,8 @@ function outDivForm ()
         { 
         for($i=2; $i<10; $i++) // цикл со счетчиком от 2 до 9
             { 
-            echo '<div class="allForm">'; // оформляем таблицу в блочной форме
             outRow( $i ); // вызывем функцию, формирующую содержание
             // столбца умножения на $i (на 4, если $i==4) 
-            echo '</div>'; 
             } 
         } 
     else 
@@ -113,10 +112,10 @@ function outRow ( $n )
     {
         if($i*$n <= 9){
 
-            echo '<a href=?content='.$n.'>'.$n.'</a> x <a href=?content='.$i.'>'.$i.'</a> = <a href=?content='.($i*$n).'>'.($i*$n).'</a><br>'; // выводим строку столбца с тегом
+            echo '<div class="allForm"><a href=?content='.$n.'>'.$n.'</a> x <a href=?content='.$i.'>'.$i.'</a> = <a href=?content='.($i*$n).'>'.($i*$n).'</a></div>'; // выводим строку столбца с тегом
         }
         else{
-            echo '<a href=?content='.$n.'>'.$n.'</a> x <a href=?content='.$i.'>'.$i.'</a> = '.($i*$n).'<br>'; // выводим строку столбца с тегом
+            echo '<div class="allForm"><a href=?content='.$n.'>'.$n.'</a> x <a href=?content='.$i.'>'.$i.'</a> = '.($i*$n).'</div>'; // выводим строку столбца с тегом
         }
     }     
 } 
@@ -128,7 +127,15 @@ function outRowtd ( $n )
     for($i=2; $i<=9; $i++) // цикл со счетчиком от 2 до 9.
     {
         if($i*$n <= 9){
-            echo '<tr><td><a href=?content='.$n.'>'.$n.'</a> * <a href=?content='.$i.'>'.$i.'</a></td><td> <a href=?content='.($i*$n).'>'.($i*$n).'</a></td></tr>';
+            echo '
+            <tr>
+                <td>
+                    <a href=?content='.$n.'>'.$n.'</a> * <a href=?content='.$i.'>'.$i.'</a>
+                </td>
+                <td>
+                    <a href=?content='.($i*$n).'>'.($i*$n).'</a>
+                </td>
+            </tr>';
         }
         else{
             echo '<tr><td><a href=?content='.$n.'>'.$n.'</a> * <a href=?content='.$i.'>'.$i.'</a></td><td>'.($i*$n).'</a></td></tr>';
@@ -138,7 +145,8 @@ function outRowtd ( $n )
 ?>
 
     </main>
-    <footer><?php
+    <footer><div style = "position: absolute; left: 0%;top:80%; width: 100%; height: 20%; color:black">
+<?php 
     //echo''.$_GET['html_type'].'<br>';
     if( !isset($_GET['html_type']) || $_GET['html_type'] === 'TABLE') 
         $s='Табличная верстка. '; // строка с информацией 
