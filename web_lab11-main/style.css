@@ -21,3 +21,11 @@
     margin-top: -180px;
     margin-left: 300px;
 }
+
+.allForm{
+    border: 2px;
+    font-size: 20px;
+    width: 100px;
+    border: 1px solid rgb(0, 0, 0);
+    
+}
